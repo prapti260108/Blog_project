@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Blogs</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #f4f4f4;
+      margin: 0;
+      padding: 0;
+    }
+
+    h1 {
+      color: #333;
+      text-align: center;
+      margin-top: 20px;
+    }
+
+    .blogs-container {
+      width: 80%;
+      margin: 0 auto;
+      padding: 20px;
+      display: flex;
+      flex-direction: column;
+      gap: 20px;
+    }
+
+    .blog-card {
+      background-color: #fff;
+      padding: 20px;
+      border-radius: 8px;
+      box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+      transition: transform 0.3s ease, background-color 0.3s ease;
+    }
+
+    .blog-card:hover {
+      transform: scale(1.02);
+      background-color: #f7f7f7;
+    }
+
+    .blog-title {
+      font-size: 1.8em;
+      color: #333;
+      margin-bottom: 10px;
+    }
+
+    .blog-author,
+    .blog-date,
+    .blog-published {
+      font-size: 1em;
+      color: #777;
+    }
+
+    .blog-content {
+      font-size: 1.1em;
+      color: #555;
+      margin-top: 15px;
+    }
+
+    .blog-image {
+      max-width: 100%;
+      height: auto;
+      margin-bottom: 15px;
+      border-radius: 8px;
+    }
+
+    .blog-description {
+      font-size: 1.2em;
+      color: #555;
+      margin-top: 10px;
+    }
+
+    .blog-buttons {
+      margin-top: 15px;
+    }
+
+    .btn {
+      padding: 8px 16px;
+      margin-right: 10px;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+    }
+
+    .btn-edit {
+      background-color: #4CAF50;
+      color: white;
+    }
+
+    .btn-delete {
+      background-color: #f44336;
+      color: white;
+    }
+
+    p {
+      text-align: center;
+      font-size: 1.2em;
+      color: #555;
+    }
+
+    .navbar {
+      background-color: #333;
+      color: #fff;
+      padding: 10px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .navbar a {
+      color: #fff;
+      text-decoration: none;
+      padding: 8px 16px;
+      margin: 0 10px;
+      border-radius: 4px;
+    }
+
+    .navbar a:hover {
+      background-color: #555;
+    }
+
+    @media (max-width: 768px) {
+      .blogs-container {
+        width: 90%;
+      }
+
+      .blog-title {
+        font-size: 1.5em;
+      }
+    }
+  </style>
+</head>
+<body>
+  
+  <div class="navbar">
+    <a href="/">Home</a>
+    <a href="/blogs/create">Create Blog</a>
+   
+  </div>
+
+  <h1>All Blogs</h1>
+
+  <div class="blogs-container">
+    <% if (blogs.length > 0) { %>
+      <% blogs.forEach(blog => { %>
+        <div class="blog-card">
+          <h2 class="blog-title"><%= blog.title %></h2>
+      
+          <% if (blog.image) { %>
+            <img src="/uploads/<%= blog.image %>" alt="Blog Image" class="blog-image" width="200">
+          <% } %>
+          
+          <p class="blog-description"><%= blog.description %></p>
+
+          <p class="blog-published">Published On: <%= new Date(blog.publishedDate).toLocaleDateString() %></p>
+          <div class="blog-content">
+            <%= blog.content %>
+          </div>
+
+          <div class="blog-buttons">
+            <a href="/blogs/edit/<%= blog._id %>" class="btn btn-edit">Edit</a>
+            <form action="/blogs/delete/<%= blog._id %>" method="POST" style="display:inline;">
+              <button type="submit" class="btn btn-delete">Delete</button>
+            </form>
+          </div>
+        </div>
+      <% }) %>
+    <% } else { %>
+      <p>No blogs available.</p>
+    <% } %>
+  </div>
+
+</body>
+</html>

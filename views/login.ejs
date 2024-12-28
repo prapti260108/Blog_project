@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Login</title>
+  <style>
+    body {
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background-color: #f4f7f6;
+      color: #075e54;
+      margin: 0;
+      padding: 0;
+    }
+
+    h3 {
+      color: #128c7e;
+      text-align: center;
+      font-size: 24px;
+      margin-bottom: 20px;
+    }
+
+    /* Navbar Styles */
+    ul {
+      list-style-type: none;
+      margin: 0;
+      padding: 15px 30px;
+      background-color: #2C3F51; /* Navbar color */
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    }
+
+    .navbar-left, .navbar-right {
+      display: flex;
+      align-items: center;
+      gap: 30px;
+    }
+
+    ul a {
+      text-decoration: none;
+      color: #ecf0f1;
+      padding: 12px 18px;
+      font-size: 18px;
+      font-weight: bold;
+      border-radius: 5px;
+      transition: background-color 0.4s, transform 0.2s;
+    }
+
+    ul a:hover {
+      background-color: #3498db;
+      transform: translateY(-2px);
+    }
+
+    .navbar-right span {
+      color: #ecf0f1;
+      font-size: 16px;
+      font-style: italic;
+    }
+
+    .user-image {
+      border-radius: 50%;
+      height: 40px;
+      width: 40px;
+      object-fit: cover;
+    }
+
+    /* Login Form Styles */
+    form {
+      background-color: #ffffff;
+      padding: 30px;
+      border-radius: 10px;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+      max-width: 400px;
+      margin: 60px auto 0;
+      font-size: 16px;
+    }
+
+    label {
+      font-weight: bold;
+      margin-bottom: 5px;
+      display: block;
+    }
+
+    input[type="text"],
+    input[type="password"] {
+      width: 100%;
+      padding: 12px;
+      margin: 10px 0;
+      border: 1px solid #075e54;
+      border-radius: 6px;
+      box-sizing: border-box;
+      font-size: 16px;
+    }
+
+    input[type="submit"] {
+      background-color: #128c7e;
+      color: white;
+      padding: 12px;
+      border: none;
+      border-radius: 6px;
+      cursor: pointer;
+      width: 100%;
+      font-size: 18px;
+      transition: background-color 0.3s ease, transform 0.2s ease;
+    }
+
+    input[type="submit"]:hover {
+      background-color: #075e54;
+      transform: translateY(-2px);
+    }
+
+    .form-footer {
+      text-align: center;
+      margin-top: 20px;
+    }
+
+    .form-footer a {
+      color: #075e54;
+      text-decoration: none;
+      font-weight: bold;
+    }
+
+    .form-footer a:hover {
+      color: #128c7e;
+    }
+  </style>
+</head>
+
+<body>
+  <!-- Navbar -->
+  <ul>
+    <div class="navbar-left">
+      <a href="/user">Home</a>
+      <a href="/blogs/all">All Blogs</a>
+    </div>
+    <div class="navbar-right">
+      <% if (!user) { %>
+        <a href="/user/signUP">SignUp</a>
+        <a href="/user/login">Login</a>
+      <% } else { %>
+        <span>Welcome, <%= user.username %>!</span>
+        <a href="/user/logout">Logout</a>
+      <% } %>
+    </div>
+  </ul>
+
+  <!-- Login Form -->
+  <form action="/user/login" method="post">
+    <h3>Login</h3>
+
+    <label for="email">Email:</label>
+    <input type="text" id="email" name="email" required><br>
+
+    <label for="password">Password:</label>
+    <input type="password" id="password" name="password" required><br>
+
+    <input type="submit" value="Login">
+
+    <div class="form-footer">
+      <p>Don't have an account? <a href="/user/signUP">Sign up here</a></p>
+    </div>
+  </form>
+</body>
+
+</html>

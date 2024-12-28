@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Navbar</title>
+  <style>
+    body {
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      margin: 0;
+      padding: 0;
+      background-color: #e2e2e2;
+    }
+
+    ul {
+      list-style-type: none;
+      margin: 0;
+      padding: 15px 30px;
+      background-color: #2c3e50;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    }
+
+    .navbar-left, .navbar-right {
+      display: flex;
+      align-items: center;
+      gap: 30px;
+    }
+
+    ul a {
+      text-decoration: none;
+      color: #ecf0f1;
+      padding: 12px 18px;
+      font-size: 18px;
+      font-weight: bold;
+      border-radius: 5px;
+      transition: background-color 0.4s, transform 0.2s;
+    }
+
+    ul a:hover {
+      background-color: #3498db;
+      transform: translateY(-2px);
+    }
+
+    .navbar-right span {
+      color: #ecf0f1;
+      font-size: 16px;
+      font-style: italic;
+    }
+
+    .user-image {
+      border-radius: 50%;
+      height: 40px;
+      width: 40px;
+      object-fit: cover;
+    }
+
+    @media (max-width: 768px) {
+      ul {
+        flex-direction: column;
+        align-items: flex-start;
+      }
+
+      .navbar-left, .navbar-right {
+        flex-direction: column;
+        gap: 15px;
+        width: 100%;
+      }
+
+      ul a {
+        width: 100%;
+        text-align: left;
+        padding-left: 25px;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <ul>
+    <div class="navbar-left">
+      <a href="/user">Home</a>
+      <a href="/blogs/all">All Blogs</a>
+    </div>
+    <div class="navbar-right">
+      <% if (!user) { %>
+          <a href="/user/signUP">SignUp</a>
+          <a href="/user/login">Login</a>
+      <% } else { %>
+          <span>Welcome, <%= user.username %>!</span>
+          <a href="/user/logout">Logout</a>
+      <% } %>
+    </div>
+  </ul>
+
+</body>
+</html>
